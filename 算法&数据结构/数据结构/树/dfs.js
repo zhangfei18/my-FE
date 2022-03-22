@@ -1,5 +1,5 @@
 /*
-第一遍
+第二遍
 */ 
 const tree = {
   val: 'a',
@@ -33,10 +33,15 @@ const tree = {
   ]
 }
 // 树的深度优先遍历 - 注意是树，而不是二叉树
-function dfs(root) {
-  console.log(root.val)
-  root.children.forEach(child => {
-    dfs(child)
-  });
+// function dfs(root) {
+//   console.log(root.val)
+//   root.children.forEach(child => {
+//     dfs(child)
+//   });
+// }
+function dfs(root){
+  if(!root) return
+  console.log(val)
+  root.children.forEach(child => dfs(child))
 }
 dfs(tree)

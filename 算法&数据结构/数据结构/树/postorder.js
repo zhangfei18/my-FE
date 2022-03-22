@@ -29,25 +29,23 @@ const bt = {
 }
 
 // 递归版
-// function postOrder(root) {
-//   if (!root) return
-//   postOrder(root.left)
-//   postOrder(root.right)
-//   console.log(root.val)
-// }
-
-// 非递归版
 function postOrder(root) {
-  let stack = []
+  if (!root) return
+  postOrder(root.left)
+  postOrder(root.right)
+  console.log(root.val)
+}
+
+// 非递归版 - 左右根 - 所以只需要吧=把先序遍历的顺序反着输出出来就OK了， 因此需要用到栈结构
+function postOrder(root) {
+  let stack = [root]
   let outputStack = []
-  stack.push(root)
   while (stack.length) {
-    let n = stack.pop()
-    outputStack.push(n)
-    if (n.left) { stack.push(n.left) }
-    if (n.right) { stack.push(n.right) }
+    let c = stack.pop()
+    outputStack.push(c)
+    if (c.left) stack.push(c.left)
+    if (c.right) stack.push(c.right)
   }
-  console.log(outputStack)
   while (outputStack.length) {
     console.log(outputStack.pop().val)
   }

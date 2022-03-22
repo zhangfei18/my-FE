@@ -34,20 +34,14 @@ const bt = {
 //   preOrder(root.left)
 //   preOrder(root.right)
 // }
-
 // 非递归版
 function preOrder(root){
-  let stack = []
-  stack.push(root)
+  let stack = [root]
   while(stack.length){
-    const current = stack.pop()
-    console.log(current.val)
-    if(current.right){
-      stack.push(current.right)
-    }
-    if(current.left){
-      stack.push(current.left)
-    }
-  }  
+    let c = stack.pop()
+    console.log(c.val)
+    if(c.right) stack.push(c.right)
+    if(c.left) stack.push(c.left)
+  }
 }
 preOrder(bt)
