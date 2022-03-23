@@ -1,4 +1,5 @@
 const path = require('path')
+const ZfPlugin = require('./plugins/ZfPlugin.js')
 module.exports = {
   mode: 'development',
   entry: './src/index.js',
@@ -31,5 +32,6 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [new ZfPlugin()]
 }
