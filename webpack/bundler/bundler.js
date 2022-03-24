@@ -3,69 +3,71 @@ const parser = require('@babel/parser')
 const path = require('path')
 const traverse = require('@babel/traverse').default
 const babel = require('@babel/core')
-const moduleAnalyser = (filename) => {
+function moduleAnalysis(filename) {
   const content = fs.readFileSync(filename, 'utf-8')
+  // console.log(content)
   const ast = parser.parse(content, {
-    sourceType: 'module'
+    sourceType: "module"
   })
-  const dependencies = {}
+  // console.log(ast.program.body)
+  let dependencies = {}
   traverse(ast, {
     ImportDeclaration({ node }) {
-      let dirnane = path.dirname(filename)
-      dependencies[node.source.value] = './' + path.join(dirnane, node.source.value)
+      // console.log(node)
+      // dependencies.push(node)
+      let dirname = path.dirname(filename)
+      dependencies[node.source.value] = './' + path.join(dirname, node.source.value)
     }
   })
-  let { code } = babel.transformFromAst(ast, null, {
-    presets: ["@babel/preset-env"]
+  // console.log(dependencies)
+  const { code } = babel.transformFromAst(ast, null, {
+    presets: ['@babel/preset-env']
   })
   return {
-    filename,
+    filename: filename,
+    code: code,
     dependencies,
-    code
   }
-
 }
-//  console.log(moduleAnalyser('./src/index.js'))
-function makeDependenciesGraph(entry) {
-  const moduleInfo = moduleAnalyser(entry)
-  // console.log(moduleInfo)
+// console.log(moduleAnalysis('./src/index.js'))
+
+function graphAnalysis(entry) {
+  const moduleInfo = moduleAnalysis(entry)
   let stack = [moduleInfo]
-  for (let i = 0; i < stack.length; i++) {
-    const { dependencies } = stack[i]
-    for (let dependency in dependencies) {
-      // console.log(dependencies[dependency])
-      stack.push(moduleAnalyser(dependencies[dependency]))
+  for (let index = 0; index < stack.length; index++) {
+    let { dependencies } = stack[index]
+    for (let d in dependencies) {
+      stack.push(moduleAnalysis(dependencies[d]))
     }
   }
   // console.log(stack)
-  let grapth = {}
-  stack.forEach(m => {
-    grapth[m.filename] = {
-      code: m.code,
-      dependencies: m.dependencies
+  let graph = {}
+  stack.forEach(module => {
+    graph[module.filename] = {
+      code: module.code,
+      dependencies: module.dependencies
     }
   })
-  return grapth
+  return graph
 }
+// console.log(graphAnalysis('./src/index.js'))
 function generateCode(entry) {
-  const dependenciesGraph = makeDependenciesGraph(entry)
-  // console.log(dependenciesGraph)
-  const graph = JSON.stringify(dependenciesGraph)
-  return `
-    (function(graph){
-      function require(module){
-        let exports = {}
-        function localRequire(relaticePath){
-          return require(graph[module].dependencies[relaticePath])
-        }
-        (function(require, exports, code){
-          eval(code)
-        })(localRequire, exports, graph[module].code)
-        return exports
+  const graph = JSON.stringify(graphAnalysis(entry))
+  let code = `
+  (function(graph){
+    function require(module){
+      let exports = {}
+      function localRequrie(relativePath){
+        return require(graph[module].dependencies[relativePath])
       }
-      require('${entry}')
-    })(${graph})
+      (function(code, require, exports){
+        eval(code)
+      })(graph[module].code, localRequrie, exports)
+      return exports
+    }
+    require('${entry}')
+  })(${graph})
   `
+  return code
 }
-const code = generateCode('./src/index.js')
-console.log(code)
+console.log(generateCode('./src/index.js'))
