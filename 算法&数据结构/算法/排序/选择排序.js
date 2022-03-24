@@ -1,17 +1,15 @@
 Array.prototype.selectionSort = function selectionSort() {
   for (let i = 0; i < this.length - 1; i++) {
-    let minIndex = i
-    // 先查找最小元素
-    for (let j = i; j < this.length; j++) {
-      if (this[j] < this[minIndex]) {
-        minIndex = j
+    let minI = i
+    for (let j = i + 1; j < this.length; j++) {
+      if (this[j] < this[minI]) {
+        minI = j
       }
     }
-    // 找到之后进行和当前元素进行替换
-    if(this[i] !== this[minIndex]){
-      let temp = this[i]
-      this[i] = this[minIndex]
-      this[minIndex] = temp
+    if (minI !== i) {
+      let temp = this[minI]
+      this[minI] = this[i]
+      this[i] = temp
     }
   }
 }

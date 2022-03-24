@@ -155,6 +155,8 @@ SplitChunksPlugin 配置参数讲解
     }
     
 ```
+# 懒加载
+当我们在代码中使用import()语法时，webpack会将其抽离成单独的js文件，便很好的方便了vue异步组件的编写
 
 # 代码分析工具 https://v4.webpack.js.org/ -> GUIDES -> Code Splitting -> Bundle Analysis
 

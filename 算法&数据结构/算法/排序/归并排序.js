@@ -1,27 +1,24 @@
-Array.prototype.mergeSort = function mergeSort() {
+Array.prototype.mergeSort = function () {
   function rec(arr) {
-    let res = []
-    if (arr.length === 1) {
-      return arr
-    }
+    if (arr.length <= 1) return arr
+    let ret = []
     let mid = Math.floor(arr.length / 2)
     let left = arr.slice(0, mid)
-    let right = arr.slice(mid, arr.length)
+    let right = arr.slice(mid)
     let leftArr = rec(left)
     let rightArr = rec(right)
     while (leftArr.length || rightArr.length) {
       if (leftArr.length && rightArr.length) {
-        res.push(leftArr[leftArr.length - 1] < rightArr[rightArr.length - 1] ? leftArr.shift() : rightArr.shift())
-      } else if (leftArr.length) {
-        res.push(leftArr.shift())
-      } else if (rightArr.length) {
-        res.push(rightArr.shift())
+        ret.push(leftArr[0] > rightArr[0] ? rightArr.shift() : leftArr.shift())
+      }else if(leftArr.length){
+        ret.push(leftArr.shift())
+      }else if(rightArr.length){
+        ret.push(rightArr.shift())
       }
     }
-    return res
+    return ret
   }
-  let res = rec(this)
-  return res
+  console.log(rec(this))
 }
 
 console.log([5, 4, 3, 2, 1].mergeSort())

@@ -1,23 +1,18 @@
 Array.prototype.quickSort = function quickSort() {
   function rec(arr) {
     if (arr.length <= 1) return arr
-    let mid = arr[0]
     let left = []
     let right = []
-    for (let i = 1; i < arr.length; i++) {
-      if (arr[i] < mid) {
-        left.push(arr[i])
-      }
-      if (arr[i] > mid) {
-        right.push(arr[i])
+    let mid = arr[0]
+    for (let index = 1; index < arr.length; index++) {
+      if (arr[index] > mid) {
+        right.push(arr[index])
+      } else if (arr[index] < mid) {
+        left.push(arr[index])
       }
     }
     return [...rec(left), mid, ...rec(right)]
   }
-  let ret = rec(this)
-  ret.forEach((element, index) => {
-    this[index] = element
-  })
-  console.log(ret)
+  return rec(this)
 }
 console.log([5, 4, 3, 2, 1].quickSort())
