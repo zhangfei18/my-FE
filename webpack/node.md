@@ -199,3 +199,42 @@ SplitChunksPlugin 配置参数讲解
   ```javascript
   "debug": "node --inspect --inspect-brk node_modules/webpack/bin/webpack.js"
   ```
+
+# 如果配置打包一个库
+### 和业务代码配置的区别
+- output增加一个属性 libraryTarget: 'umd' => 支持amd esM commonjs引入使用
+- output增加一个属性 library: '库的名字' => 支持全局变量使用
+- externals => 在我们的库里面使用了别人的库，但是我们最后不想将第三方库打包到自己的库代码里面去，我们想让用户在引入我们的这个库之前自己引入这个第三方库，此时我们可以使用externals: ['lodash']
+
+# PWA
+- 配置一个script: 'start': 'http-server dist'
+- 使用插件：workbox-webpack-plugin
+
+# ts库的打包配置
+- 安装ts-loader
+- 需要创建tsconfig.json文件
+- 使用第三方包需要安装对应的类型文件
+
+# eslint在webpack中的使用
+- 安装eslint eslint --init
+- 安装编辑器eslint插件配合高亮显示
+- 安装eslint-loader
+
+# webpack打包速度的优化
+1. 升级node的
+2. 在尽可能少的模块上应用loader 例如loader配置中的exclude和include
+3. plugin尽可能少且可靠
+4. resolve参数合理配置
+```javascript
+  {
+    extensions: ['.js', '.jsx'],
+    mainFiles: ['index', 'child'],
+    alias: {
+      '@': path.resolve(__dirname, '../src')
+      'zf': path.resolve(__dirname, '../src/child')
+    }
+  }
+```
+5. 使用dllPlugin提高打包速度
+6. 多进程
+7. 合理使用sourceMap
