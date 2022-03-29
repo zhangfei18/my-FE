@@ -1,13 +1,14 @@
 /*
-  第二遍
+  第三遍over
 */
 Array.prototype.bubbleSort = function bubbleSort() {
-  for (let i = 0; i < this.length - 1; i++) {
-    for (let j = 0; j < this.length - i - 1; j++) {
-      if (this[j] > this[j + 1]) {
-        let temp = this[j + 1]
-        this[j + 1] = this[j]
-        this[j] = temp
+  let l = this.length
+  for (let j = 0; j < l - 1; j++) {
+    for (let i = 0; i < l - 1 - j; i++) {
+      if (this[i] > this[i + 1]) {
+        let buffer = this[i]
+        this[i] = this[i + 1]
+        this[i + 1] = buffer
       }
     }
   }

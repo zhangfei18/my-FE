@@ -1,3 +1,6 @@
+/*
+  第三遍
+*/
 Array.prototype.selectionSort = function selectionSort() {
   for (let i = 0; i < this.length - 1; i++) {
     let minI = i
@@ -7,9 +10,9 @@ Array.prototype.selectionSort = function selectionSort() {
       }
     }
     if (minI !== i) {
-      let temp = this[minI]
-      this[minI] = this[i]
-      this[i] = temp
+      let buffer = this[i]
+      this[i] = this[minI]
+      this[minI] = buffer
     }
   }
 }
