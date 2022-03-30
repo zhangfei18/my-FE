@@ -38,17 +38,20 @@ const bt = {
 
 
 // 非递归版 - 左根右
+// 由于中序遍历访问的节点和处理的节点不是一个，所以就需要我们借助
+// 指针访问节点，使用栈处理节点。
 function inOrder(root) {
-  let stack = [root]
-  let cur = root.left
-  while (stack.length || cur) {
+  let ret = []
+  let stack = []
+  let cur = root
+  while (stack || cur) {
     while (cur) {
       stack.push(cur)
       cur = cur.left
     }
-    let c = stack.pop()
-    console.log(c.val)
-    cur = c.right
+    cur = stack.pop()
+    ret.push(cur.val)
+    cur = cur.right
   }
 }
 inOrder(bt)
