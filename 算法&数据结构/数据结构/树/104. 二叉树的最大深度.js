@@ -29,6 +29,7 @@ const bt = {
   }
 }
 
+// 递归版
 function maxDepth(root) {
   let res = 0
   function dfs(root, dep) {
@@ -43,3 +44,26 @@ function maxDepth(root) {
   console.log(res)
 }
 maxDepth(bt)
+
+// 迭代版
+function maxDepth2(root) {
+  let depth = 0
+  if (!root) return depth
+  let queue = [root]
+  while (queue.length) {
+    depth++
+    for (let index = queue.length - 1; index >= 0; index--) {
+      let cur = queue.shift()
+      if(!cur.left && cur.right){
+        return
+      }
+      if (cur.left) {
+        queue.push(cur.left)
+      }
+      if (cur.right) {
+        queue.push(cur.right)
+      }
+    }
+  }
+  return depth
+}

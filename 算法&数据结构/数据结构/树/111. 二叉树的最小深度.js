@@ -51,8 +51,10 @@ const bt = {
     }
   }
 }
+
+// 递归版
 function minDepth(root) {
-  if(!root) return 0
+  if (!root) return 0
   let depArr = []
   function dfs(root, dep) {
     if (!root) return
@@ -67,3 +69,26 @@ function minDepth(root) {
 }
 
 minDepth(bt)
+
+// 非递归版
+function minDepth2() {
+  let depth = 0
+  if (!root) return depth
+  let queue = [root]
+  while (queue.length) {
+    depth++
+    for (let index = queue.length - 1; index >= 0; index--) {
+      let cur = queue.shift()
+      if (!cur.left && !cur.right) {
+        return depth
+      }
+      if (cur.left) {
+        queue.push(cur.left)
+      }
+      if (cur.right) {
+        queue.push(cur.right)
+      }
+    }
+  }
+  return depth
+}
