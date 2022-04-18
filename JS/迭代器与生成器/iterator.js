@@ -121,3 +121,27 @@ for (let v of map2([1, 2, 3], x => x)) {
     break
   }
 }
+
+// demo6 - 如何让一个对象可迭代
+function iteratorObject(obj) {
+  obj[Symbol.iterator] = function () {
+    let allCount = Object.keys(obj)
+    let curCount = 0
+    return {
+      next() {
+        if (curCount < allCount.length) {
+          return {
+            value: obj[allCount[curCount++]],
+            done: false
+          }
+        } else {
+          return {
+            done: true
+          }
+        }
+      }
+    }
+  }
+}
+let obj = { a: 1, b: 2, c: 3 }
+iteratorObject(obj)

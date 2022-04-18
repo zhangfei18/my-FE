@@ -49,7 +49,7 @@ MyPromsie.prototype.then = function (resolveCb, rejectCb) {
     })
   })
 }
-MyPromsie.prototype.catch = function(failFn){
+MyPromsie.prototype.catch = function (failFn) {
   this.then(null, failFn)
 }
 
@@ -94,6 +94,34 @@ MyPromsie.all = function (promises) {
         }
       }).catch(function (err) {
         reject(err)
+      })
+    }
+  })
+}
+
+MyPromsie.allSettled = function (promises) {
+  promises = promises.map((p) => {
+    if (!p instanceof MyPromsie) {
+      return MyPromsie.resolve(p)
+    } else {
+      return p
+    }
+  })
+  let count = 0
+  let outputs = []
+  return new MyPromsie(function (resolve, reject) {
+    for (let index = 0; index < promises.length; index++) {
+      promises[index].then(function (res) {
+        count++
+        outputs[index] = { status: 'fulfilled', value: res }
+        if (count >= promises.length) {
+          resolve(outputs)
+        }
+      }).catch(function (err) {
+        count++
+        if (count >= promises.length) {
+          outputs[outputs] = { status: 'rejected', reason: err.reason }
+        }
       })
     }
   })

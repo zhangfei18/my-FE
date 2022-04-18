@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flex</title>
+    <style>
+      .parent {
+        width: 300px;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+      }
+      .parent > div {
+        box-sizing: border-box;
+        height: 40px;
+        border: 1px solid #f90;
+        /* width: 50px; */
+      }
+      .a {
+        /* flex-basis: 100px; */
+        width: 50px;
+        flex: 1;
+      }
+      .b {
+        /* flex-basis: 50px; */
+        width: 50px;
+        flex: 0 auto;
+        /* 0 0 auto */
+      }
+      .c {
+        /* flex-basis: 200px; */
+        width: 50px;
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="a"></div>
+      <div class="b"></div>
+      <div class="c"></div>
+    </div>
+  </body>
+  <script>
+    /**
+     * flex: 弹性盒模型
+     * 可用空间的大小
+     * flex: flex-grow flex-shrink flex-basic的简写
+     * 如果给一个元素没有定义上面的属性, 那么默认值就是如下: flex-grow: 0; flex-shrink: 1; flex-basic: auto;
+     *  flex-basic: auto(先取元素设置的宽度值, 然后再取元素内容的宽度) | 某个像素值(该值优先级会大于给元素设置的宽度值)
+     *  flex-grow: 控制元素占用的可用空间的比例
+     *  flex-shrink: 控制元素总长度超出父级盒子的长度后的缩放比例
+     * 常用简写： 
+     *  flex: initial - 默认值：0 1 auto
+     *  flex: auto - 1 1 auto
+     *  flex: none -  0 0 auto
+     *  flex: 0 auto - 0 0 auto
+     */
+  </script>
+</html>

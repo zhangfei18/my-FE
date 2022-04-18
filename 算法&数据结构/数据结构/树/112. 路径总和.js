@@ -61,7 +61,7 @@ function hasPathSum(root, targetSum) {
   let is = false
   function dfs(root, sum) {
     if (!root.left && !root.right && sum === targetSum) {
-      id = true
+      is = true
     }
     dfs(root.left, sum + root.left.val)
     dfs(root.right, sum + root.right.val)

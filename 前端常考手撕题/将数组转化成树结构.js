@@ -86,5 +86,6 @@ function transform(list) {
       dfs(root, current.parent_id, current)
     }
   }
+  return root
 }
-transform(menu_list)
+ console.log(transform(menu_list))

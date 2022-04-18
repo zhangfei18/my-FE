@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background: #fff !important;
+      }
+      .root {
+        border: 3px #000 solid;
+        width: 200px;
+      }
+      .root div {
+        box-sizing: border-box;
+        border: 1px #000 solid;
+        background-color: #fff;
+      }
+      .div-a {
+        position: relative;
+        z-index: 100;
+        top: 50px;
+        width: 200px;
+        height: 100px;
+      }
+      .div-b {
+        position: absolute;
+        z-index: 300;
+        top: 80px;
+        width: 100px;
+        height: 50px;
+      }
+      .div-c {
+        position: absolute;
+        z-index: 200;
+        width: 50px;
+        height: 100px;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="root">
+      root
+      <div class="div-a">
+        div-a
+        <div class="div-b">div-b</div>
+      </div>
+      <div class="div-c">div-c</div>
+    </div>
+  </body>
+</html>

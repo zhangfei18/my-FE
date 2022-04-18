@@ -3,7 +3,7 @@
  * 本题考察的是字符串的搜索，会用到KMP算法
  */
 
-const getNext = require('../../算法/KMP/最长相同前后缀.js')
+const getNext = require('../../算法/KMP/前缀表.js')
 function strStr(haystack, needle) {
   console.log(getNext)
   let next = getNext(needle)
