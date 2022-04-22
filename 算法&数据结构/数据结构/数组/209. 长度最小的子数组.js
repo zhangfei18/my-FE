@@ -1,5 +1,7 @@
 
-
+/**
+ * 暴力解法
+ */
 var minSubArrayLen = function (target, nums) {
   let len = nums.length
   let ret = Infinity
@@ -19,6 +21,9 @@ var minSubArrayLen = function (target, nums) {
 
 console.log(minSubArrayLen(7, [2, 3, 1, 2, 4, 3]))
 
+/**
+ * 双指针-滑动窗口
+ * */ 
 function minSubArrayLen_2(target, nums) {
   let len = nums.length
   let ret = Infinity

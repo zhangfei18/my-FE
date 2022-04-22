@@ -5,7 +5,9 @@
 
 function reverseWords(s) {
   let sArr = Array.from(s)
+  // 先去除空格
   removeExtraSpaces(sArr)
+  // 反转给定范围内的字符
   reverse(sArr, 0, sArr.length - 1)
   let start = 0
   for (let i = 0; i <= sArr.length; i++) {

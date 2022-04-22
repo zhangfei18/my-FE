@@ -1,6 +1,6 @@
 function deepClone(obj, hash = new WeakMap()) {
-  if (obj === null) {
-    return null
+  if (obj == null) {
+    return obj
   }
   if (obj instanceof Date) {
     return new Date(obj)

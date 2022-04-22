@@ -9,8 +9,8 @@
 
 function cloneDeep(obj) {
   let type = typeof obj
-  if (obj === null) {
-    return null
+  if (obj == null) {
+    return obj
   }
   if (type !== 'object') {
     return obj
@@ -19,6 +19,7 @@ function cloneDeep(obj) {
   if (/^RegExp|Date$/.test(type)) {
     return new constructor.name(obj)
   }
+  // 到这只有对象和数组了
   let ret = new constructor.name
   for (let key in obj) {
     if (!Object.prototype.hasOwnProperty(key)) break
