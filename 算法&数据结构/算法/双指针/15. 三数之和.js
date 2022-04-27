@@ -15,7 +15,7 @@ function threeSum(nums) {
   return ret
 }
 
-console.log(threeSum([-1,0,1,2,-1,-4]))
+// console.log(threeSum([-1, 0, 1, 2, -1, -4]))
 
 
 /**
@@ -44,7 +44,41 @@ function threeSum_2(nums) {
       }
     }
   }
-  return Array.from(ret).map(function (s){return s.split(',')})
+  return Array.from(ret).map(function (s) { return s.split(',') })
+}
+for (let r of threeSum_2([-1, 0, 1, 2, -1, -4])) {
+  console.log('threeSum_2:', r)
 }
 
-console.log(threeSum_2([-1,0,1,2,-1,-4]))
+function threeSum_3(nums) {
+  nums.sort()
+  let ret = []
+  let left
+  let right
+  let len = nums.length
+
+  for (let i = 0; i < len; i++) {
+    if (i !== 0 && nums[i] === nums[i - 1]) {
+      continue
+    }
+    left = i
+    right = len - 1
+    while (left < right) {
+      let sum = nums[i] + nums[left] + nums[right]
+      if (sum === 0) {
+        ret.push([nums[i], nums[left], nums[right]])
+        left++
+        right--
+      } else if (sum < 0) {
+        left++
+      } else if (sum > 0) {
+        right--
+      }
+    }
+  }
+  return ret
+}
+for (let r of threeSum_3([-1, 0, 1, 2, -1, -4])) {
+  console.log('threeSum_3:', r)
+}
+
