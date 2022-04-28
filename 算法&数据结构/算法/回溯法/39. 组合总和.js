@@ -1,4 +1,6 @@
-
+/**
+ * 这道题和77题的区别就是该题不需要考虑去重
+ * */ 
 
 function combinationSum(nums, target) {
   let ret = []

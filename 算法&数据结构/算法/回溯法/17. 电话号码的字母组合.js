@@ -11,10 +11,12 @@ function letterCombinations(digits) {
       ret.push(path.join(''))
       return
     }
-    let s = Number(digits[start])
-    console.log(map[s])
-    for (let i = 0; i < map[s].length; i++) {
-      path.push(map[digits[start]][i])
+    let n = Number(digits[start])
+    let str = map[n]
+    // console.log(map[s])
+    for (let i = 0; i < str.length; i++) {
+      path.push(str[i])
+      // 因为组合问题不需要去重, 所以给下一轮传递的并不是i/ i+1, 而是start+1
       backtracking(digits, len, start + 1)
       path.pop()
     }
