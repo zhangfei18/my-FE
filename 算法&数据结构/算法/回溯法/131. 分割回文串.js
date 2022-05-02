@@ -1,4 +1,11 @@
-
+/**
+ * 
+ * @param {*} s 
+ * @returns 
+ * 注意： 在切割问题上， 横向的for循环和组合问题是有区别的
+ *  在组合问题中：for循环每次+1 都是元素向后前进了一个
+ *  在切割问题上：for循环每次+1 此时包含的子串就长了以为
+ */
 
 function partition(s) {
   let ret = [] // 存放最后的结果
@@ -11,7 +18,7 @@ function partition(s) {
     }
     for (let i = startIndex; i < s.length; i++) {
       if (isHuiWen(s, startIndex, i)) {
-        path.push(s.substring(startIndex, i+1))
+        path.push(s.substring(startIndex, i + 1))
         backtraking(i + 1)
         path.pop()
       } else {

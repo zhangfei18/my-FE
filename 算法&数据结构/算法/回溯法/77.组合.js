@@ -10,6 +10,7 @@ function combine(n, k) {
       ret.push(path.slice(0))
       return;
     }
+    // 剪枝优化写法: for(let i = startIndex; i <= n - (k - path.length); i++) + 1
     for (let i = startIndex; i <= n; i++) {
       path.push(i)
       backtracking(n, k, i + 1)// 向下传递i+1, 避免重复选取

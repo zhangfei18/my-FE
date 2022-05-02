@@ -9,7 +9,6 @@
 var findSubsequences = function (nums) {
   let ret = []
   let path = []
-
   backtracking(0)
   return ret
   function backtracking(startIndex) {
