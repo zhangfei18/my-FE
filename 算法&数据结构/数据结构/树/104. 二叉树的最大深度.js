@@ -29,26 +29,17 @@ const bt = {
   }
 }
 
-// 递归版1
+// 递归版1 - 使用后续遍历 
 function maxDepth(root) {
-  let res = 0
-  function dfs(root, dep) {
-    if (!root) return
-    if (!root.left && !root.right) {
-      res = Math.max(res, dep)
-    }
-    dfs(root.left, dep + 1)
-    dfs(root.right, dep + 1)
+  if (root === null) {
+    return 0
   }
-  dfs(root, dep = 1)
-  console.log(res)
+  let dl = maxDepth(root.left)
+  let dr = maxDepth(root.right)
+  return 1 + Math.max(dl, dr)
 }
 maxDepth(bt)
-// 递归版2
-function maxDepth_2(root) {
-  if (root == null) return 0
-  return Math.max(maxDepth_2(root.left), maxDepth_2(root.right)) + 1
-}
+
 
 
 
