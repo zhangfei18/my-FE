@@ -36,37 +36,26 @@ let bt = {
   }
 }
 
-// var hasPathSum = function (root, targetSum) {
-//   if (!root) return false
-//   let stack = []
-//   let is = false
-//   function dfs(root) {
-//       if (!root) return
-//       stack.push(root.val)
-//       if (!root.left && !root.right) {
-//           let sum = stack.reduce((sum, num) => {
-//               return sum + num
-//           }, 0)
-//           if(sum === targetSum) is = true
-//       }
-//       root.left && dfs(root.left)
-//       root.right && dfs(root.right)
-//       stack.pop()
-//   }
-//   dfs(root)
-//   return is
-// };
+// 本题显然是只需要遍历某一路径， 当某一路径符合题目条件后需要返回了
+// 所以需要返回值
 function hasPathSum(root, targetSum) {
   if (!root) return false
-  let is = false
+  return dfs(root, root.val)
   function dfs(root, sum) {
-    if (!root.left && !root.right && sum === targetSum) {
-      is = true
+    if (!root.left && !root.right) {
+      if (sum === targetSum) {
+        return true
+      } else {
+        return false
+      }
     }
-    dfs(root.left, sum + root.left.val)
-    dfs(root.right, sum + root.right.val)
+    if (root.left) {
+      return dfs(root.left, sum + root.left.val)
+    }
+    if (root.right) {
+      return dfs(root.right, sum + root.right.val)
+    }
+    return false
   }
-  dfs(root, root.val)
-  return is
 }
 console.log(hasPathSum(bt, 22))
