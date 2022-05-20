@@ -1,4 +1,6 @@
-
+/**
+ * 采用后续遍历-天然的回溯法
+ */
 
 var lowestCommonAncestor = function (root, p, q) {
   if (root === null || root.val === p.val || root.val === q.val) {
